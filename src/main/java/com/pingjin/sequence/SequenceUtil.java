@@ -1,10 +1,15 @@
-package com.pingjin.string;
+package com.pingjin.sequence;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.pingjin.common.SnowflakeIdWorker;
 
+/**
+ * 生成唯一ID
+ * @author pingjin create 2018年4月11日
+ *
+ */
 public class SequenceUtil {
 
 	private static final SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
