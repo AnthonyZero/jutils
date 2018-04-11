@@ -268,4 +268,32 @@ public class StringUtil {
 		
 		return sb.toString();
 	}
+	
+	
+	/**
+	 * 将emoji表情替换成空串
+	 * 
+	 * @param source
+	 * @return
+	 */
+	public static String filterEmoji(String source) {
+		if (hasText(source)) {
+			return source.replaceAll("[\ud800\udc00-\udbff\udfff\ud800-\udfff]", "");
+		} else {
+			return source;
+		}
+	}
+	
+	/**
+	 * 正则表达式去掉小括号 中括号 大括号中内容包括括号
+	 * @param str
+	 * @return
+	 */
+	public static String filterBracketsContent(String source) {
+		if (hasText(source)) {
+			return source.replaceAll("\\(.*?\\)|\\{.*?}|\\[.*?]|（.*?）", "");
+		} else {
+			return source;
+		}
+	}
 }

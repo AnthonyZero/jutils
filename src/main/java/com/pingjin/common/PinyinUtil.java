@@ -11,7 +11,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
  * @author pingjin create 2018年4月11日
  *
  */
-public class Pinyin4jUtil {
+public class PinyinUtil {
 	
 	/**
 	 * 汉字转拼音，英文字符不变
