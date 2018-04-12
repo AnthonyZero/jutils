@@ -169,4 +169,10 @@ public class OpenIdUtil {
 		}
 		return -1;
 	}
+	
+	public static void main(String[] agrs) {
+		String openId = buildOpenId(getInitOpenId(), 43154314321L);
+		System.out.println(openId);
+		System.out.println(openId.length());
+	}
 }
