@@ -315,6 +315,7 @@ public class GoogleQrcodeUtil {
 		
         encode(encoderContent, logoPath, distPath, "png", 300, true);
         encode("www.baidu.com", "D:/test/2/qrcode.jpg", 400, true);
+        
         System.out.println("success");
     }  
 }
