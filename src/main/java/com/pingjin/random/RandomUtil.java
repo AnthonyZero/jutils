@@ -142,4 +142,10 @@ public class RandomUtil {
         }
         return dataType;
     }
+    
+    public static void main(String[] agrs) {
+    	System.out.println(randomInt(10,20));
+    	System.out.println(randomString(4));
+    	System.out.println(randomNumbers(5));
+    }
 }

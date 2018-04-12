@@ -19,5 +19,5 @@ public class UuidUtil {
 		uuid = uuid.replace("-", "").toUpperCase();
 		return uuid;
 	}
-
+	
 }
