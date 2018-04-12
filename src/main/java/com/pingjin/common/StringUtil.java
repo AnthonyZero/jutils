@@ -97,9 +97,9 @@ public class StringUtil {
 	 */
 	public static String toHexString(byte b, boolean prefix) {		
 		if (prefix) {
-			return String.format("0x%0" + 2 + "X", b);
+			return String.format("0x%0" + 2 + "x", b);
 		}
-		return String.format("%0" + 2 + "X", b);
+		return String.format("%0" + 2 + "x", b);
 	}
 	
 	/**
@@ -127,9 +127,9 @@ public class StringUtil {
 	 */
     public static String toHexString(long number, boolean prefix) {
     	if (prefix) {
-		    return String.format("0x%0" + 16 + "X", number);
+		    return String.format("0x%0" + 16 + "x", number);
     	}
-    	return String.format("%0" + 16 + "X", number);
+    	return String.format("%0" + 16 + "x", number);
 	}
     
     /**
@@ -141,9 +141,9 @@ public class StringUtil {
 	 */
     public static String toHexString(int number, boolean prefix) { 
     	if (prefix) {
-    		return String.format("0x%0" + 8 + "X", number);
+    		return String.format("0x%0" + 8 + "x", number);
     	}
-    	return String.format("%0" + 8 + "X", number);
+    	return String.format("%0" + 8 + "x", number);
 	}
     
     /**
@@ -155,9 +155,9 @@ public class StringUtil {
 	 */
     public static String toHexString(short number, boolean prefix) { 
     	if (prefix) {
-		    return String.format("0x%0" + 4 + "X", number);
+		    return String.format("0x%0" + 4 + "x", number);
     	}
-    	return String.format("%0" + 4 + "X", number);
+    	return String.format("%0" + 4 + "x", number);
 	}
     
 	/**

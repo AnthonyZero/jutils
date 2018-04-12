@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.commons.codec.binary.Hex;
+
 import com.pingjin.common.StringUtil;
 
 /**
@@ -20,7 +22,7 @@ public class Md5Util {
     private final static String ALGORITHM = "MD5";
     
     /**
-     * 签名
+     * 签名(JDK MD5加密)
      * 
      * @param buf
      * @return
@@ -76,7 +78,7 @@ public class Md5Util {
         }
         
         String s = sb.toString();
-        return s.toUpperCase();
+        return s.toLowerCase();
     }
     
     /**
@@ -91,5 +93,18 @@ public class Md5Util {
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalArgumentException("No such algorithm [" + ALGORITHM + "]");
         }
+    }
+    
+    public static void main(String[] args) {
+    	//默认JDK MD5加密
+    	String s = "as1d354cas";
+    	MessageDigest messageDigest = getMessageDigest();
+    	byte[] value = messageDigest.digest(s.getBytes());
+    	//字节数组（byte[]）转为十六进制（Hex）字符串
+    	System.out.println(Hex.encodeHex(value));
+    	System.out.println(StringUtil.toHexString(value));
+    	
+    	//本类实现
+    	System.out.println(getMd5Hexs(digest(s.getBytes())));
     }
 }
