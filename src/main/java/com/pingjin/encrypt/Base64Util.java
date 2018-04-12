@@ -318,4 +318,12 @@ public class Base64Util {
             writer.write(out, 0, 4);
         }
     }
+    
+    public static void main(String[] args) {
+    	String s = "askjbkcnkaubbjko";
+    	String encodeStr = encode(s.getBytes());
+    	System.out.println(encodeStr);
+    	String decodeStr = new String(decode(encodeStr));
+    	System.out.println(decodeStr.equals(s));
+    }
 }
