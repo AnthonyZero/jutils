@@ -36,6 +36,15 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 public class GoogleQrcodeUtil {
     private static final String CHARSET = "utf-8";
   
+    /**
+     * 生成二维码图片
+     * @param content 内容
+     * @param logoImgPath 二维码logo地址 null或者""直接返回二维码图片
+     * @param size 大小
+     * @param needCompress 是否压缩
+     * @return
+     * @throws Exception
+     */
     private static BufferedImage createImage(String content, String logoImgPath,int size,boolean needCompress) throws Exception {  
         Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();  
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);  //容错率,分四个等级：H、L 、M、 Q,H为最高级别
@@ -113,7 +122,7 @@ public class GoogleQrcodeUtil {
      *  
      * @param content 内容 
      * @param logoImgPath LOGO地址 
-     * @param destPath 存放目录
+     * @param destPath 存放地址
      * @param imgType 图片类型
      * @param size 二维码尺寸
      * @param needCompress 是否压缩LOGO 
@@ -300,12 +309,12 @@ public class GoogleQrcodeUtil {
   
     public static void main(String[] args) throws Exception {   
         
-		String distPath = "F:/test/1/qrcode.png"; // 生成二维码图片存放的地址
+		String distPath = "D:/test/1/qrcode.png"; // 生成二维码图片存放的地址
 		String encoderContent = "https://anthonyzero.github.io/"; // 二维码显示的内容
-		String logoPath = "F:/test/1/1.jpg";
+		String logoPath = "D:/a.png";
 		
         encode(encoderContent, logoPath, distPath, "png", 300, true);
-        
+        encode("www.baidu.com", "D:/test/2/qrcode.jpg", 400, true);
         System.out.println("success");
     }  
 }
