@@ -36,8 +36,8 @@ public class ImageUtil {
 	/**
 	 * 下载远程图片到本地
 	 * 
-	 * @param urlString
-	 * @param fileName
+	 * @param urlString http://图片链接地址
+	 * @param fileName 本地图片路径 D:/a.png
 	 * @throws Exception
 	 */
 	public static void downloadImage(String urlString, String fileName) {
@@ -337,9 +337,15 @@ public class ImageUtil {
 	}
 	
 	public static void main(String[] args) {
-		cropImageCenter("F:\\Photos\\手持身份证2.jpg", "F:\\Photos\\b2.jpg", 164, 120,
+		//下载图片
+		downloadImage("http://img.zcool.cn/community/01690955496f930000019ae92f3a4e.jpg@2o.jpg", "D:/a.png");
+		//图片按照比例缩放
+		scale("D:/a.png", "D:/b.png", 2, true);
+		//图片按照 指定宽高 缩放(补白)
+		scale2("D:/a.png", "D:/c.png", 845, 562, false);
+		/*cropImageCenter("F:\\Photos\\手持身份证2.jpg", "F:\\Photos\\b2.jpg", 164, 120,
 				"C:/Program Files (x86)/GraphicsMagick-1.3.16-Q8");
 		
-		System.out.println("---end");
+		System.out.println("---end");*/
 	}
 }
