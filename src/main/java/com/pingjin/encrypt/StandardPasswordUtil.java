@@ -16,7 +16,8 @@ public class StandardPasswordUtil {
 
 	/**
 	 * 加密算法
-	 * 
+	 * 倒数循环需要加密的字符串，碰到与coder相同的字符 取序号后一位为加密之后的字符
+	 * 最后将得到字符串 appendOddEven函数处理 得到最后的加密字符串
 	 * @param plaintext
 	 * @return
 	 */
@@ -82,5 +83,13 @@ public class StandardPasswordUtil {
 		}
 		
 		return "";
+	}
+	
+	public static void main(String[] args) {
+		String str = "ad35s43c$898`@qw.ds**2";
+		String s = encrypt(str);
+		System.out.println(s);
+		System.out.println(decrypt(s));
+		System.out.println(decrypt(s).equals(str));
 	}
 }
