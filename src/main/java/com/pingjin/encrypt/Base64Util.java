@@ -7,6 +7,9 @@ package com.pingjin.encrypt;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 /**
  * Base64编解码工具
@@ -325,5 +328,17 @@ public class Base64Util {
     	System.out.println(encodeStr);
     	String decodeStr = new String(decode(encodeStr));
     	System.out.println(decodeStr.equals(s));
+
+        /**
+         * 文件/图片 base64 测试   如果文件过大 会抛出OutOfMemoryError 不适用大文件（几百M） 尽量在50M以下
+         */
+        try {
+            byte[] b = Files.readAllBytes(Paths.get("D:/work/数据.zip"));
+            String endcodeData = encode(b);
+            System.out.println(endcodeData);
+            Files.write(Paths.get("D:/work/data.zip"), decode(endcodeData), StandardOpenOption.CREATE); //创建覆盖
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
