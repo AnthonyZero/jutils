@@ -18,10 +18,10 @@ public class SnowflakeIdWorker {
     private final long twepoch = 1420041600000L;
 
     /** 机器id所占的位数 5L*/
-    private final long workerIdBits = 2L;
+    private final long workerIdBits = 2L; //使总数 64位 - 3位
 
     /** 数据标识id所占的位数 5L*/
-    private final long datacenterIdBits = 2L;
+    private final long datacenterIdBits = 2L; //使总数64位 - 3位
 
     /** 支持的最大机器id，结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数) */
     private final long maxWorkerId = -1L ^ (-1L << workerIdBits);
@@ -30,7 +30,7 @@ public class SnowflakeIdWorker {
     private final long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
 
     /** 序列在id中占的位数 12L*/
-    private final long sequenceBits = 8L;
+    private final long sequenceBits = 8L; //这里8位代表只需要8位的毫秒计数 会使总数64位 - 4位
 
     /** 机器ID向左移12位 */
     private final long workerIdShift = sequenceBits;
@@ -58,9 +58,9 @@ public class SnowflakeIdWorker {
 
    
     /**
-     * 构造函数
-     * @param workerId 工作ID (0~31)
-     * @param datacenterId 数据中心ID (0~31)
+     * 构造函数 可以部署在1024个节点 由这两个值决定
+     * @param workerId 工作ID (0~31)  不能超过此时机器id所占的位数的最大值（占2位 最大值十进制就是3）
+     * @param datacenterId 数据中心ID (0~31) 不能超过此时数据中心id所占的位数的最大值（占5位 最大值十进制就是31）
      */
     public SnowflakeIdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
