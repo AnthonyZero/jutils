@@ -1,12 +1,12 @@
 package com.pingjin.encrypt;
 
-
 import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -36,8 +36,18 @@ public class AesUtils {
      */
     public static String key;
 
+
+    private static KeyGenerator keyGenForAES;
+
     static {
         key = getKey();
+        try {
+            //加密库初始化 提高效率
+            keyGenForAES = KeyGenerator.getInstance(KEY_ALGORITHM);
+            keyGenForAES.init(KEY_LENGTH);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -78,8 +88,9 @@ public class AesUtils {
      */
     public static String encrypt(String content, String key) throws Exception {
         //设置Cipher对象
-        Cipher cipher = Cipher.getInstance(ALGORITHMS,new BouncyCastleProvider());
-        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(), KEY_ALGORITHM));
+        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), KEY_ALGORITHM);
+        Cipher cipher = Cipher.getInstance(ALGORITHMS);
+        cipher.init(Cipher.ENCRYPT_MODE, keySpec);
 
         //调用doFinal
         byte[] b = cipher.doFinal(content.getBytes(StandardCharsets.UTF_8));
@@ -100,8 +111,9 @@ public class AesUtils {
         byte[] decodeBase64 = Base64.decodeBase64(encryptStr);
 
         //设置Cipher对象
-        Cipher cipher = Cipher.getInstance(ALGORITHMS,new BouncyCastleProvider());
-        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(), KEY_ALGORITHM));
+        SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), KEY_ALGORITHM);
+        Cipher cipher = Cipher.getInstance(ALGORITHMS);
+        cipher.init(Cipher.DECRYPT_MODE, keySpec);
 
         //调用doFinal解密
         byte[] decryptBytes = cipher.doFinal(decodeBase64);
@@ -109,18 +121,20 @@ public class AesUtils {
     }
 
     public static void main(String[] args) {
-        //System.out.println("密码：" + key);
         //16位
-        String key = "g1cT212gFjvdq6T0";
+        String key = getKey();
+        System.out.println("密码：" + key);
 
         //字符串
-        String str = "我是最棒的";
+        String str = "我是最棒的,加密库初始化,第一次计算会比较耗时,后面再加密就很快了.";
         try {
+            long start = System.currentTimeMillis();
             //加密
             String encrypt = AesUtils.encrypt(str, key);
             //解密
             String decrypt = AesUtils.decrypt(encrypt, key);
 
+            System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
             System.out.println("加密前：" + str);
             System.out.println("加密后：" + encrypt);
             System.out.println("解密后：" + decrypt);
@@ -129,4 +143,3 @@ public class AesUtils {
         }
     }
 }
-
