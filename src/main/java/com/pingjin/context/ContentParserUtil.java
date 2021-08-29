@@ -111,5 +111,9 @@ public class ContentParserUtil {
         }
         end = System.currentTimeMillis();
         System.out.println(end - start);
+
+        String newStr = "<mktsymbol symbol=\"DOGZ.US\">$Dogness (International) Corporation Class A(DOGZ.US)$</mktsymbol><span>'%'</span>";
+        System.out.println(ContentParserUtil.matchSymbolRegex(newStr));
+        System.out.println(ContentParserUtil.matchSymbolXml(newStr)); //'%' 异常
     }
 }
